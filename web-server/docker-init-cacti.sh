@@ -19,7 +19,10 @@ sed -i "253 a\   if (empty(\$port)) \$port = \$mysql_port;" /var/www/html/cacti/
 # update ssh public key location
 sed -i "s/^\$ssh_iden.*/\$ssh_iden   = '-i \/root\/.ssh\/id_rsa';  # SSH identity/g" /var/www/html/cacti/scripts/ss_get_by_ssh.php
 # update free command option
-sed -i "s/free -ob/free -b/g" /var/www/html/cacti/scripts/ss_get_by_ssh.php
+sed -i "s/free -ob/free -k/g" /var/www/html/cacti/scripts/ss_get_by_ssh.php
+# patch script: used memory
+sed -i "s/\$result\['STAT_memused'\].*/\$result\['STAT_memused'\]   = \$words\[2\];/g" ss_get_by_ssh.php
+sed -i "s/\$words\[2\] - \$words\[4\] - \$words\[5\]/\# \$words\[2\] - \$words\[4\] - \$words\[5\]/g" ss_get_by_ssh.php
 
 # replace index page
 rm -rf /var/www/html/index.html
