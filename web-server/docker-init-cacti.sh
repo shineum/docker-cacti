@@ -18,6 +18,8 @@ sed -i "252 a\   if (empty(\$pass)) \$pass = \$mysql_pass;" /var/www/html/cacti/
 sed -i "253 a\   if (empty(\$port)) \$port = \$mysql_port;" /var/www/html/cacti/scripts/ss_get_mysql_stats.php
 # update ssh public key location
 sed -i "s/^\$ssh_iden.*/\$ssh_iden   = '-i \/root\/.ssh\/id_rsa';  # SSH identity/g" /var/www/html/cacti/scripts/ss_get_by_ssh.php
+# update free command option
+sed -i "s/free -ob/free -b/g" /var/www/html/cacti/scripts/ss_get_by_ssh.php
 
 # replace index page
 rm -rf /var/www/html/index.html
